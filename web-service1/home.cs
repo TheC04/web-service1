@@ -30,5 +30,12 @@ namespace web_service1
             f.Show();
             this.Hide();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form f=new cat();
+            f.Show();
+            this.Hide();
+        }
     }
 }

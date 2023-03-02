@@ -30,16 +30,16 @@ namespace web_service1
         {
             await get();
         }
-        async Task<Root> get()
+        async Task<answer_val> get()
         {
-            Root product = null;
+            answer_val product = null;
             //vatID per testing IE 6388047 V
             VATid.Text = VATid.Text.Replace(" ", "");
             string url = "https://vat.abstractapi.com/v1/validate/?api_key=19df3dac00a5401e9cd193d06047b70a&vat_number="+VATid.Text;
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
-                product = await JsonSerializer.DeserializeAsync<Root>(await response.Content.ReadAsStreamAsync());
+                product = await JsonSerializer.DeserializeAsync<answer_val>(await response.Content.ReadAsStreamAsync());
                 if(product.valid)
                 {
                     label2.Text = product.tostring();
@@ -54,7 +54,7 @@ namespace web_service1
         }
     }
 
-    public class Root
+    public class answer_val
     {
         public string vat_number { get; set; }
         public bool valid { get; set; }
@@ -84,18 +84,6 @@ namespace web_service1
             return "Nome compagnia: "+name + "\n" +"Indirizzo: "+ address.Replace(',', '\n') + "\n";
         }
     }
-
-    public class Country
-    {
-        public string code { get; set; }
-        public string name { get; set; }
-        public string tostring()
-        {
-            return "Nazione: " + name + "(" + code + ")";
-        }
-    }
-
-
 }
 
 

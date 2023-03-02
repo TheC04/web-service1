@@ -83,6 +83,13 @@
     <Compile Include="calc.Designer.cs">
       <DependentUpon>calc.cs</DependentUpon>
     </Compile>
+    <Compile Include="cat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cat.Designer.cs">
+      <DependentUpon>cat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Country.cs" />
     <Compile Include="home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +104,12 @@
     <Compile Include="val.Designer.cs">
       <DependentUpon>val.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="calc.resx">
+      <DependentUpon>calc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cat.resx">
+      <DependentUpon>cat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="home.resx">
       <DependentUpon>home.cs</DependentUpon>
     </EmbeddedResource>

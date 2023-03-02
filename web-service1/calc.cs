@@ -17,4 +17,19 @@ namespace web_service1
             InitializeComponent();
         }
     }
+
+    public class amswer_calc
+    {
+        public string amount_excluding_vat { get; set; }
+        public string amount_including_vat { get; set; }
+        public string vat_amount { get; set; }
+        public string vat_category { get; set; }
+        public string vat_rate { get; set; }
+        public Country country { get; set; }
+
+        public string tostring()
+        {
+            return "Imposto non tassato: "+amount_excluding_vat+"\nImporto tassato:"+amount_including_vat + "\nValore tassa:" + vat_amount+ "\nCategoria prodotto:" + vat_category+ "\nPercentuale Vat:" +(int.Parse(vat_rate)*100).ToString()+"%\n"+this.country.tostring();
+        }
+    }
 }
