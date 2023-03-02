@@ -33,14 +33,22 @@ namespace web_service1
         async Task<Root> get()
         {
             Root product = null;
+            //vatID per testing IE 6388047 V
+            VATid.Text = VATid.Text.Replace(" ", "");
             string url = "https://vat.abstractapi.com/v1/validate/?api_key=19df3dac00a5401e9cd193d06047b70a&vat_number="+VATid.Text;
             HttpResponseMessage response = await client.GetAsync(url);
-            MessageBox.Show(response.ToString());
             if (response.IsSuccessStatusCode)
             {
                 product = await JsonSerializer.DeserializeAsync<Root>(await response.Content.ReadAsStreamAsync());
-                MessageBox.Show(product.tostring());
-                label2.Text = product.tostring();
+                if(product.valid)
+                {
+                    label2.Text = product.tostring();
+                }
+                else
+                {
+                    label2.Text = "VatID non valido";
+                }
+                label2.Location = new Point((ClientSize.Width / 2) - (label2.Width / 2), (ClientSize.Height / 2) - (label2.Height / 2));
             }
             return product;
         }
@@ -73,7 +81,7 @@ namespace web_service1
         public string address { get; set; }
         public string tostring()
         {
-            return "Nome compagnia: "+name + "\n" +"Indirizzo: "+address + "\n";
+            return "Nome compagnia: "+name + "\n" +"Indirizzo: "+ address.Replace(',', '\n') + "\n";
         }
     }
 
