@@ -28,20 +28,30 @@ namespace web_service1
             await (get());
         }
 
-        async Task<answer_cat> get()
+        async Task<List<answer_cat>> get()
         {
-            answer_cat product = null;
             //non va, json non formattato bene
-            string s = nation.SelectedItem.ToString().Substring(0, 2);
+            string s = nation.SelectedItem.ToString().Substring(0, 2), a="";
             string url = "https://vat.abstractapi.com/v1/categories?api_key=19df3dac00a5401e9cd193d06047b70a&country_code=DE";
+            List<answer_cat> resp = new List<answer_cat>();
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
-                product = await JsonSerializer.DeserializeAsync<answer_cat>(await response.Content.ReadAsStreamAsync());
-                textBox1.Text = product.tostring();
+                resp = JsonSerializer.Deserialize<List<answer_cat>>(await response.Content.ReadAsStreamAsync());
+                MessageBox.Show(response.ToString());
+                string str = ""; foreach (answer_cat ansa in resp)
+                {
+                    str += ansa.ToString();
+                }
+                MessageBox.Show(str);
+                foreach (answer_cat answer in resp)
+                {
+                    a += answer.tostring();
+                }
+                textBox1.Text = a;
                 //textBox1 = new Point((ClientSize.Width / 2) - (label2.Width / 2), (ClientSize.Height / 2) - (label2.Height / 2));
             }
-            return product;
+            return resp;
         }
     }
     public class answer_cat
@@ -50,10 +60,10 @@ namespace web_service1
 
         public string tostring()
         {
-            string s = null;
+            string s = "";
             foreach(rates rate in Property1)
             {
-                s += rate.tostring()+"\n";
+                s += rate.tostring();
             }
             return s;
         }
