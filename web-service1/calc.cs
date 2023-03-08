@@ -9,14 +9,44 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace web_service1
 {
     public partial class calc : Form
     {
+        static HttpClient client = new HttpClient();
+
         public calc()
         {
             InitializeComponent();
+            categories.Hide();
+        }
+
+        private void nation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loading.Text = "Caricamento in corso...";
+            loading.Show();
+            getC();
+        }
+        async Task<IEnumerable<answer_cat>> getC()
+        {
+            string s = nation.SelectedItem.ToString().Substring(0, 2);
+            string url = "https://vat.abstractapi.com/v1/categories?api_key=19df3dac00a5401e9cd193d06047b70a&country_code=" + s;
+            IEnumerable<answer_cat> resp = new List<answer_cat>();
+            HttpResponseMessage response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                resp = JsonSerializer.Deserialize<List<answer_cat>>(await response.Content.ReadAsStreamAsync());
+                MessageBox.Show(response.ToString());
+                foreach (answer_cat answer in resp)
+                {
+                    categories.Items.Add(answer.category);
+                }
+                loading.Hide();
+                categories.Show();
+            }
+            return resp;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -24,27 +54,34 @@ namespace web_service1
             get();
         }
 
-         async Task<answer_calc> get()
-         {
-             answer_calc product = null;
-             //https://vat.abstractapi.com/v1/calculate?api_key=YOUR_API_KEY&amount=535&country_code=DE&vat_category=books&is_vat_incl=true
-             string url = "https://vat.abstractapi.com/v1/validate/?api_key=19df3dac00a5401e9cd193d06047b70a&vat_number=";
-             /*HttpResponseMessage response = await client.GetAsync(url);
-             if (response.IsSuccessStatusCode)
-             {
-                 product = await JsonSerializer.DeserializeAsync<answer_calc>(await response.Content.ReadAsStreamAsync());
-                 if (product.valid)
-                 {
-                     label2.Text = product.tostring();
-                 }
-                 else
-                 {
-                     label2.Text = "VatID non valido";
-                 }
-                 label2.Location = new Point((ClientSize.Width / 2) - (label2.Width / 2), (ClientSize.Height / 2) - (label2.Height / 2));
-             }*/
-             return product;
-         }
+        async Task<answer_calc> get()
+        {
+            answer_calc product = null;
+            string url = "https://vat.abstractapi.com/v1/calculate?api_key=19df3dac00a5401e9cd193d06047b70a&amount=" + amount.Value + "&country_code=" + nation.SelectedItem.ToString().Split('(')[0];
+            if (categories.SelectedIndex > 0)
+            {
+                url += "&vat_category=" + categories.SelectedItem;
+            }
+            if (included.Checked)
+            {
+                url += "&is_vat_incl=true";
+            }
+            HttpResponseMessage response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                product = await JsonSerializer.DeserializeAsync<answer_calc>(await response.Content.ReadAsStreamAsync());
+                MessageBox.Show(product.tostring());
+                ans.Text = product.tostring();
+                ans.Location = new Point((ClientSize.Width / 2) - (label2.Width / 2), (ClientSize.Height / 2) - (label2.Height / 2));
+            }
+            loading.Text = "";
+            loading.Show();
+            categories.Hide();
+            nation.SelectedIndex = 0;
+            amount.Value = 0;
+            included.Checked=false;
+            return product;
+        }
     }
 
     public class answer_calc
