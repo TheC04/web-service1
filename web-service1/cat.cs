@@ -37,12 +37,10 @@ namespace web_service1
             if (response.IsSuccessStatusCode)
             {
                 resp = JsonSerializer.Deserialize<List<answer_cat>>(await response.Content.ReadAsStreamAsync());
-                MessageBox.Show(response.ToString());
                 string str = ""; foreach (answer_cat ansa in resp)
                 {
                     str += ansa.ToString();
                 }
-                MessageBox.Show(str);
                 foreach (answer_cat answer in resp)
                 {
                     a += answer.tostring() + Environment.NewLine + Environment.NewLine;
@@ -50,6 +48,11 @@ namespace web_service1
                 textBox1.Text = a;
             }
             return resp;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
         }
     }
 
@@ -61,7 +64,7 @@ namespace web_service1
         public string description { get; set; }
         public string tostring()
         {
-            return "Categoria: " + this.category + Environment.NewLine + "Valore VAT: " + this.rate;
+            return "Category: " + this.category + Environment.NewLine + "VAT percentage: " + (double.Parse(this.rate)*0.1).ToString();
         }
     }
 }

@@ -19,23 +19,26 @@ namespace web_service1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form f = new val();
-            f.Show();
             this.Hide();
+            val newform = new val();
+            newform.ShowDialog();
+            this.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form f=new calc();
-            f.Show();
             this.Hide();
+            calc newform = new calc();
+            newform.ShowDialog();
+            this.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form f=new cat();
-            f.Show();
             this.Hide();
+            cat newform = new cat();
+            newform.ShowDialog();
+            this.Show();
         }
     }
 }

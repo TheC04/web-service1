@@ -40,7 +40,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 41);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Verifica di un VATid";
+            this.button1.Text = "Check a VATId";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -50,7 +50,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 54);
             this.button2.TabIndex = 1;
-            this.button2.Text = "Calcolo VAT di un prodotto";
+            this.button2.Text = "Calculate VAT of a product";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -60,9 +60,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(37, 44);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(162, 20);
+            this.label1.Size = new System.Drawing.Size(164, 20);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Cosa si vuole fare?";
+            this.label1.Text = "What do you need?";
             // 
             // button3
             // 
@@ -70,7 +70,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(118, 50);
             this.button3.TabIndex = 3;
-            this.button3.Text = "Visualizzare le categorie\r\ncon vat differente";
+            this.button3.Text = "Visualize VAT categories in countries";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 

@@ -25,7 +25,7 @@ namespace web_service1
 
         private void nation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loading.Text = "Caricamento in corso...";
+            loading.Text = "Loading...";
             loading.Show();
             getC();
         }
@@ -38,7 +38,6 @@ namespace web_service1
             if (response.IsSuccessStatusCode)
             {
                 resp = JsonSerializer.Deserialize<List<answer_cat>>(await response.Content.ReadAsStreamAsync());
-                MessageBox.Show(response.ToString());
                 foreach (answer_cat answer in resp)
                 {
                     categories.Items.Add(answer.category);
@@ -70,17 +69,19 @@ namespace web_service1
             if (response.IsSuccessStatusCode)
             {
                 product = await JsonSerializer.DeserializeAsync<answer_calc>(await response.Content.ReadAsStreamAsync());
-                MessageBox.Show(product.tostring());
                 ans.Text = product.tostring();
-                ans.Location = new Point((ClientSize.Width / 2) - (label2.Width / 2), (ClientSize.Height / 2) - (label2.Height / 2));
             }
             loading.Text = "";
             loading.Show();
             categories.Hide();
-            nation.SelectedIndex = 0;
             amount.Value = 0;
             included.Checked=false;
             return product;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
         }
     }
 
@@ -95,7 +96,7 @@ namespace web_service1
 
         public string tostring()
         {
-            return "Imposto non tassato: "+amount_excluding_vat+"\nImporto tassato:"+amount_including_vat + "\nValore tassa:" + vat_amount+ "\nCategoria prodotto:" + vat_category+ "\nPercentuale Vat:" +(int.Parse(vat_rate)*100).ToString()+"%\n"+this.country.tostring();
+            return "Amount: " + this.amount_excluding_vat + "\nAmount with VAT: " + this.amount_including_vat + "\nVAT amount: " + this.vat_amount + "\nCategory: " + this.vat_category + "\nVAT percentage: " + (double.Parse(vat_rate) * 0.1).ToString() +"%\n" + this.country.tostring();
         }
     }
 }

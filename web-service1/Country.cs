@@ -12,7 +12,7 @@ namespace web_service1
         public string name { get; set; }
         public string tostring()
         {
-            return "Nazione: " + name + "(" + code + ")";
+            return "Nation: " + name + "(" + code + ")";
         }
     }
 }

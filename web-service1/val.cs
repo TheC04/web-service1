@@ -44,13 +44,18 @@ namespace web_service1
                 {
                     label2.Text = product.tostring();
                 }
-                else
-                {
-                    label2.Text = "VatID non valido";
-                }
-                label2.Location = new Point((ClientSize.Width / 2) - (label2.Width / 2), (ClientSize.Height / 2) - (label2.Height / 2));
+                label2.Location = new Point((ClientSize.Width / 2) - (label2.Width / 2), label2.Top);
+            }
+            else
+            {
+                MessageBox.Show("There was an error with the connection", "Error",  MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return product;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
         }
     }
 
@@ -65,11 +70,11 @@ namespace web_service1
             string s;
             if (valid)
             {
-                s = "VATid valido";
+                s = "VATid valid";
             }
             else
             {
-                s = "VATid non valido";
+                s = "VATid not valid";
             }
             return "VATid: " + vat_number + "\n" + s + "\n" + company.tostring() + country.tostring();
         }
@@ -81,7 +86,7 @@ namespace web_service1
         public string address { get; set; }
         public string tostring()
         {
-            return "Nome compagnia: "+name + "\n" +"Indirizzo: "+ address.Replace(',', '\n') + "\n";
+            return "Company name: "+name + "\n" +"Address: "+ address.Replace(',', '\n') + "\n";
         }
     }
 }
