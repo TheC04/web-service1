@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.amount = new System.Windows.Forms.NumericUpDown();
-            this.included = new System.Windows.Forms.RadioButton();
             this.categories = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,6 +43,7 @@
             // 
             // amount
             // 
+            this.amount.DecimalPlaces = 2;
             this.amount.Location = new System.Drawing.Point(12, 32);
             this.amount.Maximum = new decimal(new int[] {
             999999999,
@@ -63,17 +63,7 @@
             0,
             0,
             0});
-            // 
-            // included
-            // 
-            this.included.AutoSize = true;
-            this.included.Location = new System.Drawing.Point(12, 220);
-            this.included.Name = "included";
-            this.included.Size = new System.Drawing.Size(166, 30);
-            this.included.TabIndex = 2;
-            this.included.TabStop = true;
-            this.included.Text = "Check this button to calculate\r\nthe originalprice";
-            this.included.UseVisualStyleBackColor = true;
+            this.amount.ValueChanged += new System.EventHandler(this.amount_ValueChanged);
             // 
             // categories
             // 
@@ -204,7 +194,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.categories);
-            this.Controls.Add(this.included);
             this.Controls.Add(this.amount);
             this.Controls.Add(this.loading);
             this.MaximumSize = new System.Drawing.Size(351, 489);
@@ -221,7 +210,6 @@
         #endregion
 
         private System.Windows.Forms.NumericUpDown amount;
-        private System.Windows.Forms.RadioButton included;
         private System.Windows.Forms.ComboBox categories;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

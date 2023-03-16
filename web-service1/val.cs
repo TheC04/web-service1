@@ -44,7 +44,12 @@ namespace web_service1
                 {
                     label2.Text = product.tostring();
                 }
+                else
+                {
+                    label2.Text = "VATid not valid,\nthere is no company with this code";
+                }
                 label2.Location = new Point((ClientSize.Width / 2) - (label2.Width / 2), label2.Top);
+                VATid.Clear();
             }
             else
             {

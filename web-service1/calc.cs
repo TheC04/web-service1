@@ -56,14 +56,10 @@ namespace web_service1
         async Task<answer_calc> get()
         {
             answer_calc product = null;
-            string url = "https://vat.abstractapi.com/v1/calculate?api_key=19df3dac00a5401e9cd193d06047b70a&amount=" + amount.Value + "&country_code=" + nation.SelectedItem.ToString().Split('(')[0];
+            string url = "https://vat.abstractapi.com/v1/calculate?api_key=19df3dac00a5401e9cd193d06047b70a&amount=" + amount.Value.ToString().Replace(',', '.') + "&country_code=" + nation.SelectedItem.ToString().Split('(')[0];
             if (categories.SelectedIndex > 0)
             {
                 url += "&vat_category=" + categories.SelectedItem;
-            }
-            if (included.Checked)
-            {
-                url += "&is_vat_incl=true";
             }
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
@@ -71,17 +67,23 @@ namespace web_service1
                 product = await JsonSerializer.DeserializeAsync<answer_calc>(await response.Content.ReadAsStreamAsync());
                 ans.Text = product.tostring();
             }
-            loading.Text = "";
+            loading.Text = "Select a nation to visualise the product\r\nwith a special VAT\r\n";
             loading.Show();
+            amount.Value = (decimal)1.00;
+            categories.Items.Clear();
             categories.Hide();
             amount.Value = 0;
-            included.Checked=false;
             return product;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+        }
+
+        private void amount_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
