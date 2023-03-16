@@ -192,7 +192,10 @@
             this.Controls.Add(this.included);
             this.Controls.Add(this.amount);
             this.Controls.Add(this.loading);
+            this.MaximumSize = new System.Drawing.Size(351, 489);
+            this.MinimumSize = new System.Drawing.Size(351, 489);
             this.Name = "calc";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Calculator";
             ((System.ComponentModel.ISupportInitialize)(this.amount)).EndInit();
             this.ResumeLayout(false);

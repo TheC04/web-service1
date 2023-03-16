@@ -123,6 +123,8 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.nation);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(306, 489);
+            this.MinimumSize = new System.Drawing.Size(306, 489);
             this.Name = "cat";
             this.Text = "Categorie";
             this.ResumeLayout(false);

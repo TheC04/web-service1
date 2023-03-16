@@ -78,12 +78,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(236, 351);
+            this.ClientSize = new System.Drawing.Size(236, 338);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.MinimumSize = new System.Drawing.Size(252, 328);
+            this.MaximumSize = new System.Drawing.Size(252, 377);
+            this.MinimumSize = new System.Drawing.Size(252, 377);
             this.Name = "home";
             this.Text = "Home";
             this.ResumeLayout(false);

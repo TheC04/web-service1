@@ -92,6 +92,8 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.VATid);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(362, 341);
+            this.MinimumSize = new System.Drawing.Size(362, 341);
             this.Name = "val";
             this.Text = "val";
             this.ResumeLayout(false);
