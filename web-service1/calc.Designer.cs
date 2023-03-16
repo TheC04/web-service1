@@ -45,9 +45,24 @@
             // amount
             // 
             this.amount.Location = new System.Drawing.Point(12, 32);
+            this.amount.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.amount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.amount.Name = "amount";
             this.amount.Size = new System.Drawing.Size(121, 20);
             this.amount.TabIndex = 0;
+            this.amount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // included
             // 
