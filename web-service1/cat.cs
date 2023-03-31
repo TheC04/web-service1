@@ -64,7 +64,7 @@ namespace web_service1
         public string description { get; set; }
         public string tostring()
         {
-            return "Category: " + this.category + Environment.NewLine + "VAT percentage: " + (double.Parse(this.rate)*0.1).ToString();
+            return "Category: " + this.category + Environment.NewLine + "VAT percentage: " + (double.Parse(this.rate) * 0.1).ToString() + "%";
         }
     }
 }
